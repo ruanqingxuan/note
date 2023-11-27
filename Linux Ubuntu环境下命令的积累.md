@@ -7,6 +7,7 @@
 ```
 ssh qnwang@ali.dfshan.net -p 2220
 ssh root@8.218.243.162
+ssh admin@udpcc.dfshan.net
 ```
 
 轻量级阿里云服务器
