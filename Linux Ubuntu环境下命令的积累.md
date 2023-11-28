@@ -258,7 +258,7 @@ lsof -i -P
 
 ## 曙光服务器登录
 
-ssh qnwang@igw.dfshan.net -p2229
+ssh qnwang@igw.dfshan.net -p2299
 
 密码：010711
 
