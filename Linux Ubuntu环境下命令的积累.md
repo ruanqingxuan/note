@@ -446,3 +446,5 @@ editcap.exe -d D:\test\4.pcapng D:\test\4out.pacpng
 ## vscode翻译
 
 alt+t
+## vscode块注释
+进行代码块注释的快捷键是"Alt + Shift + A"
