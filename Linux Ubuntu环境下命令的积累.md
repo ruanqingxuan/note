@@ -46,6 +46,10 @@ rsync -av proxygen root@8.217.32.98:/home/qnwang/work
 
 ```
 ps aux | grep nginx
+sudo ./nginx
+sudo ./nginx -s stop
+sudo ./nginx -v
+sudo ./nginx -t
 ```
 
 ## 复制
