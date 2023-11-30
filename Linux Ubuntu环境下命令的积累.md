@@ -34,6 +34,7 @@ scp username@hostname:/path/to/remote/file /path/to/local/file
 rsync -av proxygen root@8.218.243.162:/home/qnwang/work
 rsync -av proxygen root@wqn.dfshan.net:/home/qnwang/work
 rsync -av proxygen root@8.217.32.98:/home/qnwang/work
+rsync -av tengine-install admin@udpcc.dfshan.net:/home/admin/AR/worknew
 ```
 
 ## linux强制退出文档
