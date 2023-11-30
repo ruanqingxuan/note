@@ -456,3 +456,15 @@ alt+t
 ## vscode块注释
 进行代码块注释的快捷键是"Alt + Shift + A"
 ctrl+/
+## 解决error while loading shared libraries: libXXX.so.X: cannot open shared object file: No such file
+解决方法
+
+（1）cd /etc/ld.so.conf.d
+
+（2）sudo vim tmp-libs.conf
+
+备注： 新建文件tmp-libs.conf，这个文件名称可以随便，只要文件后缀是.conf，可以在文件中写入 /usr/local/lib ，其实不写任何内容也是可以的，只创建一个空文件也可以。
+
+（3）sudo ldconfig
+
+备注：执行该命令的目的是更新 /etc/ld.so.cache，ld.so.cache 的更新是递增式的，就像PATH系统环境变量一样，不是从头重新建立，而是向上累加。只有重新开机，系统从零开始建立ld.so.cache文件。
