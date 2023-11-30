@@ -165,6 +165,7 @@ find / -name "*-unaligned.apk" | xargs rm -rf
 wget https://github.com/fmtlib/fmt/releases/download/9.1.0/fmt-9.1.0.zip
 
 sudo ./fuse/fuse ./nvme.json Nvme0n1 /home/wqn1/key/db/
+git clone https://github.com/Tongsuo-Project/Tongsuo.git
 
 sudo qemu-system-x86_64 -name cs-exp-zns -m 6G --enable-kvm -cpu host -smp 4 -hda ./ubuntu/ubuntu.qcow2 -net user,hostfwd=tcp:127.0.0.1:7777-:22,hostfwd=tcp:127.0.0.1:2222-:2000 -net nic -drive file=./ubuntu/nvme.qcow2,if=none,id=nvm -device nvme,serial=deadbeef,drive=nvm
 
