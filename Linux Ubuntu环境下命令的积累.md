@@ -479,4 +479,3 @@ source ~/.bashrc
 ## 生成.pem文件
 cat server.crt server.key > server.pem
 
-lalalalallalalal
