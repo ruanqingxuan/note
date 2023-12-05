@@ -98,7 +98,7 @@ netstat -nupl #打开udp窗口
 netstat -ntpl #打开tcp窗口
 sudo lsof -i:443 #显示443端口的进程
 .\chrome.exe --enable-quic --quic-version=h3-27 --origin-to-force-quic-on=tinychen.com:443 #打开谷歌的quic适用
- netstat -anop | grep 8443
+netstat -anop | grep 8443
 ```
 
 ## 如何在vi编译器里显示行数
