@@ -450,3 +450,5 @@ cd caddy/cmd/caddy/
 go build
 
 caddy upgrade
+ 
+caddy run --config /home/admin/qnwang/caddy/ARtestserver/caddyfile
