@@ -472,6 +472,7 @@ ctrl+/
 备注：执行该命令的目的是更新 /etc/ld.so.cache，ld.so.cache 的更新是递增式的，就像PATH系统环境变量一样，不是从头重新建立，而是向上累加。只有重新开机，系统从零开始建立ld.so.cache文件。
 ## The command could not be located because'/usr/bin' is not included in the PATH environment variable
 export PATH=/usr/bin:$PATH
+
 (ifconfig)export PATH=/bin:/sbin:/usr/bin:/usr/sbin:$PATH
 
 vi ~/.bashrc
