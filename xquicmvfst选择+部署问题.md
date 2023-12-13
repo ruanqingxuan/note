@@ -215,10 +215,10 @@ cp /etc/letsencrypt/live/udpcc.dfshan.net/privkey.pem /home/qnwang/worknew/cert
 
 用当前配置copa无法使用，需要更改一处代码将copa连接上，ngx_xquic.c -> xquic.h
 
-将ngx_xquic.c里设置拥塞控制的代码添加上copa接口![image-20231213164908725](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20231213164908725.png)
+将ngx_xquic.c里设置拥塞控制的代码添加上copa接口![image](https://github.com/ruanqingxuan/note/assets/119039883/635ac8a0-3839-45c6-8be2-db140559e389)
 
 xqc_copa_cb在xquic.h中声明
 
-![image-20231213164959840](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20231213164959840.png)
+![image](https://github.com/ruanqingxuan/note/assets/119039883/62d69649-8d5e-41e5-82bf-cf1ba6b5eb2b)
 
 因为只改动了tengine里的源代码，重新编译tengine到tengine-install里并移动即可
