@@ -199,7 +199,8 @@ HTTPS 证书实际上是您的域独有的一段数字和字母。当有人通�
 sudo certbot certonly --standalone --register-unsafely-without-email
 ```
 
-![image-20231207205617780](C:\Users\admin\AppData\Roaming\Typora\typora-user-images\image-20231207205617780.png)
+![image](https://github.com/ruanqingxuan/note/assets/119039883/29394a3d-a8b8-4539-8ff7-4952bd3f6edd)
+
 
 ### 将其copy到相关目录下
 
