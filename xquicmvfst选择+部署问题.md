@@ -109,7 +109,7 @@ xquic_log   "pipe:rollback /usr/local/tengine/logs/tengine-xquic.log baknum=10 m
 http {
     xquic_ssl_certificate        /home/qnwang/worknew/cert/fullchain.pem;
     xquic_ssl_certificate_key    /home/qnwang/worknew/cert/privkey.pem;
-	#拥塞控制需要bbr，copa，cubic三种适用，其中copa不能适用，修改在下下一节有讲
+    #拥塞控制需要bbr，copa，cubic三种适用，其中copa不能适用，修改在下下一节有讲
     xquic_congestion_control bbr;
     xquic_socket_rcvbuf 5242880;
     xquic_socket_sndbuf 5242880;
@@ -122,9 +122,9 @@ http {
         listen 8443 default_server reuseport backlog=4096 xquic;
 
         server_name udpcc.dfshan.net;
-		#注意这里的端口要在1024以上
+        #注意这里的端口要在1024以上
         add_header Alt-Svc 'h3=":8443"; ma=2592000,h3-29=":8443"; ma=2592000' always;
-		#ssl证书即https证书，将在下一节讲到
+        #ssl证书即https证书，将在下一节讲到
         ssl_certificate     /home/qnwang/worknew/cert/fullchain.pem;
         ssl_certificate_key /home/qnwang/worknew/cert/privkey.pem;
         #设置了根目录，可以不用
