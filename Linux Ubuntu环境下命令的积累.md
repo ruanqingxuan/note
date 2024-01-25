@@ -36,6 +36,8 @@ rsync -av proxygen root@wqn.dfshan.net:/home/qnwang/work
 rsync -av proxygen root@8.217.32.98:/home/qnwang/work
 rsync -av tengine-install admin@udpcc.dfshan.net:/home/admin/AR/worknew
 rsync -av tengine-install qnwang@udpcc.dfshan.net:/home/qnwang/worknew
+#带端口的
+rsync -av tengine -avuz -e 'ssh -p 2299' qnwang@igw.dfshan.net:/home/qnwang/worknew
 ```
 
 ## linux强制退出文档
