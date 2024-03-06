@@ -54,6 +54,8 @@ cp "libxquic.so" /usr/local/lib/
 #在曙光上编译不需要这步，移动到自己的服务器上用下面这步
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/qnwang/worknew/xquic-1.6.0/build
 cd ..
+#测试xquic
+sh ../scripts/xquic_test.sh
 
 # 编译 Tengine
 cd tengine
