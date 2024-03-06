@@ -46,6 +46,12 @@ cd ../../
 cd xquic-1.6.0/
 mkdir -p build; cd build
 cmake -DXQC_SUPPORT_SENDMMSG_BUILD=1 -DXQC_ENABLE_BBR2=1 -DXQC_DISABLE_RENO=0 -DSSL_TYPE=${SSL_TYPE_STR} -DXQC_ENABLE_TESTING=1 -DSSL_PATH=${SSL_PATH_STR} -DSSL_INC_PATH=${SSL_INC_PATH_STR} -DSSL_LIB_PATH=${SSL_LIB_PATH_STR} ..
+#看到这个表明路径正确
+SSL_TYPE= babassl
+SSL_PATH= /home/qnwang/worknew/Tongsuo-8.3.2
+SSL_LIB_PATH= /home/qnwang/worknew/Tongsuo-8.3.2/libssl.a;/home/qnwang/worknew/Tongsuo-8.3.2/libcrypto.a
+SSL_INC_PATH= /home/qnwang/worknew/Tongsuo-8.3.2/include
+
 #若为1.6.2以上版本
 cmake 增加-DXQC_NO_PID_PACKET_PROCESS=1即可成功编译
 make
