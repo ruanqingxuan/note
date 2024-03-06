@@ -81,7 +81,7 @@ make install
 
 ```
 rsync -av babassl qnwang@udpcc.dfshan.net:/home/qnwang/worknew
-rsync -av xquic1.6.0 qnwang@udpcc.dfshan.net:/home/qnwang/worknew
+rsync -av xquic-1.6.0 qnwang@udpcc.dfshan.net:/home/qnwang/worknew
 rsync -av tengine-install qnwang@udpcc.dfshan.net:/home/qnwang/worknew
 ```
 
