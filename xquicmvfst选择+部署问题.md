@@ -104,7 +104,7 @@ events {
     worker_connections  1024;
 }
 
-xquic_log   "pipe:rollback /usr/local/tengine/logs/tengine-xquic.log baknum=10 maxsize=1G interval=1d adjust=600" info;
+xquic_log   "pipe:rollback /home/qnwang/worknew/tengine-install/logs/tengine-xquic.log baknum=10 maxsize=1G interval=1d adjust=600" info;
 
 http {
     xquic_ssl_certificate        /home/qnwang/worknew/cert/fullchain.pem;
