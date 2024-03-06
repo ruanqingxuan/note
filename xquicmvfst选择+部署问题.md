@@ -309,8 +309,8 @@ A4：没有相关权限，用以下方法解决
 
 ```
 cd /home/qnwang/worknew/tengine-install/sbin
-chown root tengine
-chmod u+s tengine
+sudo chown root tengine
+sudo chmod u+s tengine
 ```
 
 **注意：最好不在sudo权限下启动tengine，可以看到很多错，如果./tengine没有任何问题那基本配置成功**
