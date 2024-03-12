@@ -494,6 +494,17 @@ git 添加文件
 ```
 git add
 ```
+## git出错
 
+error: src refspec master does not match any.
+error: 推送一些引用到 'https://github.com/ruanqingxuan/octopus-xquic.git' 失败
+这个错误通常是因为本地仓库中的 master 分支不存在或者为空，而你试图推送到远程仓库的 master 分支。请确保你的本地仓库中有一个名为 master 的分支，并且有至少一个提交记录。你可以通过以下命令创建一个 master 分支并提交至少一个更改：
 
+```
+git checkout -b master
+git commit -m "Initial commit"
+git push -u origin master
+```
+
+然后再尝试推送到远程仓库。
 
