@@ -484,4 +484,16 @@ export PATH=/usr/bin:$PATH
 source ~/.bashrc
 ## 生成.pem文件
 cat server.crt server.key > server.pem
+## git命令积累
+
+git 初始化
+```
+git init
+```
+git 添加文件
+```
+git add
+```
+
+
 
