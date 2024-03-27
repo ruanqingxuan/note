@@ -508,3 +508,8 @@ git push -u origin master
 
 然后再尝试推送到远程仓库。
 
+## 查看内存占用
+
+ps
+
+top
