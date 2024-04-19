@@ -54,6 +54,7 @@ sudo ./nginx
 sudo ./nginx -s stop
 sudo ./nginx -v
 sudo ./nginx -t
+ps -ef | grep “xxname”  这个命令可以看进程是否在执行
 ```
 
 ## 复制
