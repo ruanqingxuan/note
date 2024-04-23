@@ -38,6 +38,7 @@ rsync -av tengine-install admin@udpcc.dfshan.net:/home/admin/AR/worknew
 rsync -av tengine-install qnwang@udpcc.dfshan.net:/home/qnwang/worknew
 #带端口的
 rsync -av tengine -avuz -e 'ssh -p 2299' qnwang@igw.dfshan.net:/home/qnwang/worknew
+rsync -r -va -e "ssh -p2210" *  qnwang@igw.dfshan.net:/home/qnwnag
 ```
 
 ## linux强制退出文档
