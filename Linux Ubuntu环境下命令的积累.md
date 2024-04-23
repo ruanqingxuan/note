@@ -39,6 +39,7 @@ rsync -av tengine-install qnwang@udpcc.dfshan.net:/home/qnwang/worknew
 #带端口的
 rsync -av tengine -avuz -e 'ssh -p 2299' qnwang@igw.dfshan.net:/home/qnwang/worknew
 rsync -r -va -e "ssh -p2210" *  qnwang@igw.dfshan.net:/home/qnwnag
+在linux中下载文件可以用sz filename 的方法下载
 ```
 
 ## linux强制退出文档
