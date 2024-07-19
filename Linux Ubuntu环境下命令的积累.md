@@ -1,7 +1,5 @@
 # Linux Ubuntu环境下命令的积累
 
-[TOC]
-
 ## 登录远程linux服务器
 
 ```
