@@ -367,6 +367,14 @@ cp /etc/letsencrypt/live/udpcc.dfshan.net/privkey.pem /home/qnwang/worknew/cert
 
 若出现权限问题，则使用chmod 777 *解决
 
+### certbot证书过期后更新
+
+```
+ sudo certbot renew --force-renewal
+```
+
+
+
 ## copa配置
 
 用当前配置copa无法使用，需要更改一处代码将copa连接上，ngx_xquic.c -> xquic.h
