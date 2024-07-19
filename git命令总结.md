@@ -253,3 +253,25 @@ $ git pull --rebase origin master
 ```
 
 之后再进行git push origin master就能成功了。
+
+②问题二：完美解决 git 报错 “fatal: unable to access ‘https://github.com/.../.git‘: Recv failure Connection was rese
+
+**解决方案**：取消代理设置。这是最常见的解决方法之一，通过在终端执行以下命令，可以取消 Git 的代理设置：
+
+```
+git config --global --unset http.proxy  
+git config --global --unset https.proxy
+```
+
+③问题三：git本地修改，远程库也修改了如何提交代码
+
+**解决方案**：先隐藏掉本地的修改，然后执行git pull从代码块拉取最新代码，具体步骤如下：
+
+```
+git status 查看本地的修改
+git stash 隐藏掉本地修改
+git pull 从代码库拉取更新
+git stash pop stash@{版本号}
+git add 、git commit 、git push
+```
+
