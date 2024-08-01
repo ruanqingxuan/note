@@ -447,21 +447,31 @@ dd if=/dev/urandom of=testfile bs=1024 count=100
 
 该命令将创建一个名为testfile的文件，该文件包含100个大小为1024字节的随机数据块，这将生成100个数据包。
 
-## vscode查找文件
+## vscode命令总结
+
+### vscode查找文件
 
 ctrl+p
+
+### vscode翻译
+
+alt+t
+### vscode块注释
+进行代码块注释的快捷键是"Alt + Shift + A"
+ctrl+/
+
+### vscode自动整理代码格式：
+
+```
+Shift + Alt + F
+```
 
 ## wireshark去掉重复的包
 
 editcap.exe -d D:\test\4.pcapng D:\test\4out.pacpng
 
-## vscode翻译
-
-alt+t
-## vscode块注释
-进行代码块注释的快捷键是"Alt + Shift + A"
-ctrl+/
 ## 解决error while loading shared libraries: libXXX.so.X: cannot open shared object file: No such file
+
 解决方法
 
 （1）cd /etc/ld.so.conf.d

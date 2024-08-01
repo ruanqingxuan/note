@@ -712,3 +712,81 @@ conn->conn_flag &= ~XQC_CONN_FLAG_NEED_RUN;
 2. **真实丢包（Genuine Loss）：** 这是指报文确实在传输过程中由于网络原因丢失了。真实丢包可能是由拥塞、丢包、链路故障等原因引起的，而不是仅仅是接收方的误报。在这种情况下，协议需要进行相应的重传等恢复机制来确保数据的可靠性。
 
 QUIC采用一些机制来识别和处理虚假丢包，包括通过追踪丢失报文的时间戳、使用确认（ACK）信息等。这些机制帮助QUIC区分临时的、由网络波动引起的虚假丢包和真实的丢包情况，以更有效地进行拥塞控制和恢复。
+
+### typedef struct和struct的区别
+
+在C/C++编程语言中，`typedef struct`和`struct`都是用于定义结构体类型的方式，但它们有一些关键的区别：
+
+1. **定义方式**：
+   
+   - `struct`：定义一个结构体类型。
+     ```c
+     struct Student {
+         int id;
+         char name[50];
+     };
+     ```
+     使用时需要在每次声明变量时使用`struct`关键字：
+     ```c
+     struct Student stu1;
+     ```
+   - `typedef struct`：给结构体类型定义一个别名，使得在声明变量时不再需要使用`struct`关键字。
+     ```c
+     typedef struct {
+         int id;
+         char name[50];
+     } Student;
+     ```
+     使用时可以直接使用别名：
+     ```c
+     Student stu2;
+     ```
+   
+2. **可读性和简洁性**：
+   - 使用`typedef`可以使代码更加简洁，减少了`struct`关键字的使用，提高了代码的可读性[[3](https://blog.csdn.net/qq_41139830/article/details/88638816)]。
+
+3. **兼容性**：
+   - 在C++中，可以省略`struct`关键字直接使用结构体类型，而在C中如果不使用`typedef`，则每次声明变量时都需要加上`struct`关键字[[1](https://blog.csdn.net/XIAO_yux/article/details/138281401)]。
+
+4. **示例**：
+   - `struct`定义：
+     ```c
+     struct Person {
+         int age;
+         float height;
+     };
+     struct Person person1;
+     ```
+   - `typedef struct`定义：
+     ```c
+     typedef struct {
+         int age;
+         float height;
+     } Person;
+     Person person2;
+     ```
+
+总结，`typedef struct`在很多情况下更简洁和方便，而`struct`本身更适合在需要明确区分结构体类型的情况下使用。
+
+### static inline是什么意思
+
+`static inline`是C语言和C++中用于修饰函数的两个关键字组合，具体作用如下：
+
+1. **inline关键字**：
+   - 建议编译器将函数体内联展开到每个调用点，减少函数调用的开销[[4](https://www.cnblogs.com/jack-hzm/p/11084349.html)]。
+   - 不是强制性的，编译器可能会忽略该建议。
+
+2. **static关键字**：
+   - 限制函数的作用范围，使得函数仅在定义它的文件内可见，避免与其他文件中的同名函数冲突[[2](https://blog.csdn.net/u010280307/article/details/53382246)]。
+
+3. **组合作用**：
+   - `static inline`函数具有内联和文件内可见性双重特性。
+   - 这意味着函数可以在每个调用点内联展开，同时该函数不会被其他编译单元访问，避免命名冲突[[1](https://blog.csdn.net/tjy199610_10/article/details/109460693)]。
+
+例子：
+```c
+static inline int add(int a, int b) {
+    return a + b;
+}
+```
+在这个例子中，`add`函数建议编译器内联展开，同时它只能在当前源文件中使用。
