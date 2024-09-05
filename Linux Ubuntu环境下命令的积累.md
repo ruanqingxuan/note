@@ -55,6 +55,7 @@ sudo ./nginx -s stop
 sudo ./nginx -v
 sudo ./nginx -t
 ps -ef | grep “xxname”  这个命令可以看进程是否在执行
+sudo pkill -9 tengine
 ```
 
 ## 复制
@@ -278,7 +279,7 @@ ssh qnwang@igw.dfshan.net -p2299
 
 https://blog.csdn.net/zong596568821xp/article/details/106024351
 
-- tar -zcvf filename.tar.gz filename
+- tar -zxvf  filename.tar.gz filename
 
   --with-http_v2_module
 
@@ -524,3 +525,11 @@ git push -u origin master
 ps
 
 top
+
+## 禁用密码登录
+
+vi /etc/ssh/sshd_config
+
+PasswordAuthentication no
+
+sudo systemctl reload sshd

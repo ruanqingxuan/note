@@ -65,8 +65,9 @@ cmake 增加-DXQC_NO_PID_PACKET_PROCESS=1即可成功编译
 make
 #不在曙光上编译
 cp "libxquic.so" /usr/local/lib/
+cp "/home/qnwang/worknew/AR/xquic-1.6.0/build/libxquic.so" /usr/local/lib/
 #在曙光上编译不需要这步，移动到自己的服务器上用下面这步
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/qnwang/worknew/xquic-1.6.0/build
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/qnwang/worknew/AR/xquic-1.6.0/build
 cd ..
 #测试xquic
 sh ../scripts/xquic_test.sh
@@ -322,6 +323,10 @@ A3：在曙光上编译没办法加入系统（没有sudo权限），用export L
 Q4：nginx: [emerg] bind() to 0.0.0.0:80 failed (13: Permission denied)
 
 A4：没有相关权限，用以下方法解决
+
+Q5：测试xquic_test.sh时出现openssl相关的问题
+
+A5：编译的铜锁babassl文件要放至xquic/thrid_party里，不然会识别不到
 
 ```
 cd /home/qnwang/worknew/tengine-install/sbin
