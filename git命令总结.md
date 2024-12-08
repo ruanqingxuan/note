@@ -83,7 +83,7 @@ Cannot rewrite branches: You have unstaged changes
 以强制覆盖的方式推送你的repo, 命令如下:
 
 ```bash
-git push origin master --force
+git push origin main --force
 ```
 
 ### 4 清理和回收空间
@@ -292,3 +292,188 @@ git add 、git commit 、git push
 ④问题四：Git git push显示一切都是最新的，但实际上并不是
 
 **解决方案**：确保我们使用`git add`命令将所有要提交的文件添加到暂存区，然后使用`git commit`命令进行提交。然后再使用git push将更改推送到远程存储库。
+
+# 如何使用 SSH 链接远程 Git 仓库
+
+## 🗒️ Answer
+
+使用 SSH 连接远程 Git 仓库可以避免每次推送代码时输入用户名和密码，且更安全。以下是设置和使用 SSH 链接 Git 仓库的步骤：
+
+### 1. **生成 SSH 密钥**
+首先，你需要在本地机器上生成 SSH 密钥对（如果尚未生成）：
+
+```bash
+ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+```
+
+这会生成一个公钥和私钥（通常存储在 `~/.ssh/` 目录下，默认文件名为 `id_rsa` 和 `id_rsa.pub`）。
+
+### 2. **添加 SSH 公钥到 GitHub**
+将生成的公钥添加到 GitHub 上：
+
+1. 复制公钥的内容：
+   ```bash
+   cat ~/.ssh/id_rsa.pub
+   ```
+   然后复制输出的内容。
+
+2. 登录到 GitHub，进入 **Settings** > **SSH and GPG keys**，点击 **New SSH key**，粘贴刚才复制的公钥内容，并保存。
+
+### 3. **测试 SSH 连接**
+在本地测试 SSH 连接是否成功：
+
+```bash
+ssh -T git@github.com
+```
+
+如果成功，GitHub 会返回类似以下信息：
+```bash
+Hi username! You've successfully authenticated, but GitHub does not provide shell access.
+```
+
+### 4. **克隆仓库或配置现有仓库的远程地址**
+使用 SSH URL 来克隆远程仓库：
+
+```bash
+git clone git@github.com:username/repository.git
+```
+
+如果已经克隆了仓库并想要修改远程 URL 以使用 SSH，可以执行以下命令：
+
+```bash
+git remote set-url origin git@github.com:username/repository.git
+```
+
+### 5. **推送代码**
+现在，你可以通过 SSH 协议推送代码，而无需每次输入用户名和密码：
+
+```bash
+git push origin main
+```
+
+### 总结：
+1. **生成 SSH 密钥**：使用 `ssh-keygen` 命令生成 SSH 密钥对。
+2. **添加公钥到 GitHub**：将公钥复制到 GitHub 设置中的 SSH Keys。
+3. **测试连接**：通过 `ssh -T git@github.com` 测试 SSH 连接。
+4. **克隆仓库并配置 SSH**：使用 SSH URL 克隆仓库或修改现有仓库的远程地址。
+
+通过这些步骤，你就可以安全地使用 SSH 链接 Git 仓库，避免每次提交时输入密码。
+
+## git检查文件大小
+
+要显示 **Git 暂存区**中文件的列表及其大小，可以使用以下方法：
+
+1. **使用 `git ls-files`**
+
+   - 命令：
+
+     ```bash
+     git ls-files -s
+     ```
+
+     此命令会显示暂存区中所有文件的信息，包括文件的大小、文件类型（如 blob）、文件权限等。
+
+   - 示例输出：
+
+     ```
+     100644 blob d670460b4b4aece5915caf5c68d12f560a9fe3e4 25  welcome.txt
+     ```
+
+     其中第一个字段是文件权限，最后一列是文件名，中间的字段可以通过结合其他命令解析出文件大小。
+
+2. **使用 `git cat-file` 检查文件大小**
+
+   - 命令：
+
+     ```bash
+     git ls-files | xargs -I {} git cat-file -s {}
+     ```
+
+     此方法可以显示文件在 Git 对象库中的实际大小。
+
+3. **其他相关命令**
+
+   - 使用 `git status` 查看文件状态，但不包括文件大小。
+   - 使用 `git diff --cached` 查看暂存区的更改内容，但文件大小需要另行解析。
+
+这些命令可以帮助你深入了解 Git 暂存区中的文件和对应的详细信息。
+
+## error: src refspec main does not match anyerror: failed to push some refs to 'https://github.com/ruanqingxuan/congestion_switching.git'
+
+The error `src refspec main does not match any` typically occurs when the branch you are trying to push does not exist or has not been created locally. Here's how you can resolve it:
+
+### Steps to Fix the Error:
+
+1. **Verify the Current Branch Name:**
+
+   - Run the following command to check your branch:
+
+     ```bash
+     git branch
+     ```
+
+   - If you don’t see a `main` branch, you are likely on a different branch (e.g., `master`) or haven't created a branch yet.
+
+2. **Create and Switch to the `main` Branch (if necessary):**
+
+   - If you need a 
+
+     ```
+     main
+     ```
+
+      branch but it doesn’t exist, create it:
+
+     ```bash
+     git checkout -b main
+     ```
+
+3. **Commit Your Changes:**
+
+   - Ensure there are files staged for commit:
+
+     ```bash
+     git add .
+     ```
+
+   - Commit them:
+
+     ```bash
+     git commit -m "Initial commit"
+     ```
+
+4. **Push to the Remote Repository:**
+
+   - Push the 
+
+     ```
+     main
+     ```
+
+      branch to the remote repository:
+
+     ```bash
+     git push -u origin main
+     ```
+
+5. **Check for Remote Branch Mismatches:**
+
+   - If your remote repository is configured to use a different default branch (e.g., 
+
+     ```
+     master
+     ```
+
+     ), adjust your push command:
+
+     ```bash
+     git push -u origin master
+     ```
+
+### Common Causes of This Error:
+
+- Attempting to push a branch (`main`) that doesn't exist locally or remotely.
+- Forgetting to stage or commit changes before pushing.
+- A mismatch between the default branch in the repository (`main` vs. `master`).
+
+Following these steps should resolve the issue.

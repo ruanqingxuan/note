@@ -316,9 +316,13 @@ Q2：openssl denied
 
 A2：ssl证书没有权限，进入cert文件夹，使用chmod 777 *解决
 
+/etc/letsencrypt/live/udpcc.dfshan.net
+
 Q3：libxquic.so找不到
 
-A3：在曙光上编译没办法加入系统（没有sudo权限），用export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/qnwang/worknew/xquic-1.6.0/build手动加入到系统变量里解决
+A3：在曙光上编译没办法加入系统（没有sudo权限），用export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/qnwang/worknew/AR/xquic/build手动加入到系统变量里解决
+
+sudo cp /home/qnwang/worknew/AR/xquic/build/libxquic.so /usr/local/lib
 
 Q4：nginx: [emerg] bind() to 0.0.0.0:80 failed (13: Permission denied)
 
