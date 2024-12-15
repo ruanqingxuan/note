@@ -263,10 +263,10 @@ git remote add origin https://github.com/xu-xiaoya/Elegent.git
 **解决方案**：这是由于你新创建的那个仓库里面的README文件不在本地仓库目录中，这时可以同步内容。
 
 ```javascript
-$ git pull --rebase origin master
+$ git pull --rebase origin main
 ```
 
-之后再进行git push origin master就能成功了。
+之后再进行git push origin main就能成功了。
 
 ②问题二：完美解决 git 报错 “fatal: unable to access ‘https://github.com/.../.git‘: Recv failure Connection was rese
 
@@ -292,6 +292,15 @@ git add 、git commit 、git push
 ④问题四：Git git push显示一切都是最新的，但实际上并不是
 
 **解决方案**：确保我们使用`git add`命令将所有要提交的文件添加到暂存区，然后使用`git commit`命令进行提交。然后再使用git push将更改推送到远程存储库。
+
+⑤问题五：Pulling is not possible because you have unmerged files.
+
+```bash
+git mergetool
+git pull --rebase origin main 
+```
+
+上述命令基本上会针对每个冲突文件打开本地文件、混合文件、远程文件（总共 3 个文件）。本地文件和远程文件仅供您参考，使用它们您可以选择在混合文件中包含（或不包含）哪些内容。然后只需保存并退出文件即可。
 
 # 如何使用 SSH 链接远程 Git 仓库
 
