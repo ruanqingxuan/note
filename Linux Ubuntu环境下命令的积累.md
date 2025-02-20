@@ -186,6 +186,12 @@ sudo scripts/setup.sh
 
 **通过Workbench远程连接**（2.20-3.20）
 
+## cmd链接上远程但vscode不行
+
+**因为vscode自动更新导致原有的服务器上~/.vscode-server中的文件过期了**
+
+用cmd连接，删除.vscode-server，vscode重连即可
+
 ## 删除
 
 rm -rf 文件夹
@@ -497,6 +503,11 @@ export PATH=/usr/bin:$PATH
 source ~/.bashrc
 ## 生成.pem文件
 cat server.crt server.key > server.pem
+
+### 更新SSL证书
+
+sudo certbot renew
+
 ## git命令积累
 
 git 初始化
