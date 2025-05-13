@@ -1071,3 +1071,137 @@ username ALL=(ALL:ALL) ALL
 - 记得在执行 `visudo` 时，使用正确的文本编辑器，避免编辑错误导致系统无法正常使用 `sudo`。
 
 通过上述步骤，你就可以配置 `sudo` 免密码登录。
+
+# 磁盘已满
+
+如果 `du -sh /` 统计的空间远小于磁盘总容量，但 `df -h` 显示磁盘已满，可能的原因有：
+
+### **1. 硬删除的文件仍然占用空间**
+
+进程仍然打开了一些已删除的文件，导致它们没有释放空间。可以用以下命令检查：
+
+```bash
+sudo lsof | grep deleted
+```
+
+如果发现某些大文件仍在被进程占用，重启进程或直接重启服务器可以释放空间：
+
+```bash
+sudo systemctl restart <service_name>
+```
+
+或者直接 `kill` 进程：
+
+```bash
+sudo kill -9 <PID>
+```
+
+------
+
+### **2. 磁盘 inode 用尽**
+
+即使磁盘空间没满，inode（文件系统的索引节点）满了也会导致无法写入新文件。检查 inode 使用情况：
+
+```bash
+df -i
+```
+
+如果 inode 已满，可能是某个目录下有**大量小文件**（如 `/var/log/`、`/tmp/`）。可以找出占用 inode 最多的目录：
+
+```bash
+for i in /*; do echo "$i: $(find "$i" | wc -l)"; done | sort -nr -k2 | head -10
+```
+
+如果 `/var/log` 之类的目录占用大量 inode，可以清理旧日志：
+
+```bash
+sudo journalctl --vacuum-time=7d  # 只保留最近7天的日志
+sudo rm -rf /var/log/*.gz  # 删除压缩的旧日志
+```
+
+------
+
+### **3. 挂载点问题**
+
+某些目录可能挂载到了别的磁盘，导致 `du -sh /` 没统计到所有文件。用以下命令检查：
+
+```bash
+mount | column -t
+```
+
+如果 `/var`、`/home` 这些目录挂载在不同的分区，`du` 可能漏统计了某些内容。
+
+你可以手动检查这些目录的占用：
+
+```bash
+sudo du -sh /var /home /tmp /usr
+```
+
+------
+
+### **4. 磁盘保留空间**
+
+Linux 默认会为 root 预留 5% 磁盘空间，60G 磁盘大约 3G 可能被保留。可以检查：
+
+```bash
+tune2fs -l $(df / | tail -1 | awk '{print $1}') | grep "Reserved block count"
+```
+
+如果需要释放这些空间，可以调整：
+
+```bash
+sudo tune2fs -m 1 /dev/sdX  # 把保留空间从5%降低到1%
+```
+
+（将 `/dev/sdX` 替换成 `df -h` 看到的根分区设备）
+
+------
+
+### **5. 检查 `/proc`, `/sys`, `/dev` 是否误算**
+
+这些特殊目录不占用实际空间，但 `du` 可能误统计它们：
+
+```bash
+sudo du -sh --exclude=/proc --exclude=/sys --exclude=/dev /
+```
+
+如果这个数值比 `df -h` 显示的磁盘使用情况更接近真实值，说明 `du -sh /` 统计不准确。
+
+------
+
+### **6. 执行完整清理**
+
+如果上面的方法仍未解决问题，可以试试：
+
+```bash
+sudo journalctl --vacuum-time=7d  # 清理旧日志
+sudo apt autoremove -y && sudo apt autoclean -y  # 清理不必要的软件包
+sudo rm -rf /var/tmp/*  # 清空临时文件
+```
+
+然后重启：
+
+```bash
+sudo reboot
+```
+
+------
+
+### **总结**
+
+- **优先检查被占用的已删除文件 (`lsof | grep deleted`)**
+- **确认 inode 是否耗尽 (`df -i`)**
+- **检查是否有隐藏的挂载点 (`mount`)**
+- **调整 root 预留空间 (`tune2fs -m 1`)**
+- **清理 `/var/log`、`/tmp` 等目录**
+- **重启服务器释放被占用的空间**
+
+如果还是找不到问题，可以使用 `ncdu` 进行更直观的分析：
+
+```bash
+sudo apt install ncdu  # Ubuntu/Debian
+sudo yum install ncdu  # CentOS/RHEL
+sudo ncdu /
+```
+
+它会显示所有目录的磁盘使用情况，帮助你找到隐藏的大文件。
